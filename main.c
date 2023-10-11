@@ -1,126 +1,82 @@
-// C program for the E-library
-// Management System
-#define _CRT_SECURE_NO_WARNINGS	
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "test.h"
 
-// Create Structure of Library
-struct library {
-	char book_name[20];
-	char author[20];
-	int pages;
-	float price;
-};
-
-// Driver Code
 int main()
-{	
-	test();
-	/*
-	// Create a instance
-	struct library lib[100];
+{
+    struct book{
+        int id;
+        char name[30];
+        char author[20];
+    } bk[20]={0};
 
-	char ar_nm[30], bk_nm[30];
+    int j;
+    char searchid[50];
+    
+    do{
+    printf("1. Ajouter un livre\n2. Rechercher un livre\n3. Supprimer un livre\n4. Afficher tous les livres\n5. Sortir\n\nQue voulez vous faire : ");
+    scanf("%d", &j);
 
-	// Keep the track of the number of
-	// of books available in the library
-	int i, input, count;
+    switch(j){
 
-	i = input = count = 0;
+        case 1:
+                for(int i=1; i<20; i++){
+                    if (bk[i].id==0){
+                        bk[i].id = i;
+                        printf("Entrer le nom du livre: ");
+                        scanf("%s", bk[i].name);
+                        printf("Entrer le nom de l'auteur: ");
+                        scanf("%s", bk[i].author);
+                        i=20;
+                        printf("Le livre a été ajouté.\n\n");
+                    }
+                }
+        break;
+        
+        case 2:
+                printf("Entrer le nom du livre: ");
+                scanf("%s", &searchid);
+                for(int i=1; i<20; i++){
+                    if (strcmp(searchid, bk[i].name) == 0) {
+                        printf("\n\tInformations du livre\nID du livre: %d\nNom du livre: %s\nAuteur: %s\n\n", bk[i].id, bk[i].name, bk[i].author);
+                    }
+                }
+                
 
-	// Iterate the loop
-	while (input != 5) {
+        break;
+        
+        case 3:
+                printf("Entrer le nom du livre: ");
+                scanf("%s", &searchid);
+                for(int i=1; i<20; i++){
+                    if (strcmp(searchid, bk[i].name) == 0){
+                        for(i=i; i<20; i++){
+                            bk[i]=bk[i+1];
+                        }
+                    }
+                }
+                
+        break;
+        
+        case 4:
+                printf("\nListe des livres\n\nID\tNom\t\tAuteur\n");
+                for (int i = 1; i < 20; i++) {
+                    if(bk[i].id != 0){
+                    printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
+                    }
+                }
+        break;
 
-		printf("\n\n********######"
-			"WELCOME TO E-LIBRARY "
-			"#####********\n");
-		printf("\n\n1. Add book infor"
-			"mation\n2. Display "
-			"book information\n");
-		printf("3. List all books of "
-			"given author\n");
-		printf(
-			"4. List the count of book"
-			"s in the library\n");
-		printf("5. Exit");
+        case 5:
+                printf("\n\t\tTHANK YOU!");
 
-		// Enter the book details
-		printf("\n\nEnter one of the above: ");
-		scanf("%d", &input);
+                exit(0);
+        break;
+        
+    }
+        
+    }while(j!=5);
 
-
-		// Process the input
-		switch (input) {
-
-			// Add book
-		case 1:
-
-			printf("Enter book name = ");
-			scanf("%s", lib[i].book_name);
-
-			printf("Enter author name = ");
-			scanf("%s", lib[i].author);
-
-			printf("Enter pages = ");
-			scanf("%d", &lib[i].pages);
-
-			printf("Enter price = ");
-			scanf("%f", &lib[i].price);
-			count++;
-
-			break;
-
-			// Print book information
-		case 2:
-			printf("you have entered"
-				" the following "
-				"information\n");
-			for (i = 0; i < count; i++) {
-
-				printf("book name = %s",
-					lib[i].book_name);
-
-				printf("\t author name = %s",
-					lib[i].author);
-
-				printf("\t pages = %d",
-					lib[i].pages);
-
-				printf("\t price = %f",
-					lib[i].price);
-			}
-			break;
-
-			// Take the author name as input
-		case 3:
-			printf("Enter author name : ");
-			scanf("%s", ar_nm);
-			for (i = 0; i < count; i++) {
-
-				if (strcmp(ar_nm,
-					lib[i].author)
-					== 0)
-					printf("%s %s %d %f",
-						lib[i].book_name,
-						lib[i].author,
-						lib[i].pages,
-						lib[i].price);
-			}
-			break;
-
-			// Print total count
-		case 4:
-			printf("\n No of books in "
-				"brary : %d",
-				count);
-			break;
-		case 5:
-			exit(0);
-		}
-	}
-	return 0;
+    return 0;
 }
-*/
-}
+
