@@ -1,0 +1,6 @@
+﻿  functions.c
+D:\Cours\dev_code\c\Project_c\Project_c\sources\functions.c(17,5): warning C4013: 'getch' non défini(e) ; extern retournant int pris par défaut
+D:\Cours\dev_code\c\Project_c\Project_c\sources\functions.c(49,13): warning C4013: 'stricmp' non défini(e) ; extern retournant int pris par défaut
+  main.c
+  Génération de code en cours...
+  Project_c.vcxproj -> D:\Cours\dev_code\c\Project_c\x64\Debug\Project_c.exe
