@@ -1,0 +1,3 @@
+﻿  main.c
+D:\Cours\dev_code\c\Projet_c\Projet_c\Sources\main.c(44,25): warning C4013: 'strcmp' non défini(e) ; extern retournant int pris par défaut
+  Projet_c.vcxproj -> D:\Cours\dev_code\c\Projet_c\x64\Debug\Projet_c.exe
