@@ -46,7 +46,7 @@ void search_book()
     printf("\n\nID\tNom\t\tAuteur\n");
     for (int i = 1; i < 20; i++)
     {
-        if (strcmp(searchdata, bk[i].name) == 0)
+        if (stricmp(searchdata, bk[i].name) == 0)
         {
             printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
         }
@@ -60,9 +60,12 @@ void search_author()
     printf("\n\nID\tNom\t\tAuteur\n");
     for (int i = 1; i < 20; i++)
     {
-        if (strcmp(searchdata, bk[i].author) == 0)
+        if (stricmp(searchdata, bk[i].author) == 0)
         {
-            printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
+            if (bk[i].id != 0)
+            {
+                printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
+            }
         }
     }
 }
@@ -74,7 +77,7 @@ void modify_book()
     printf("\n\nID\tNom\t\tAuteur\n");
     for (int i = 1; i < 100; i++)
     {
-        if (strcmp(searchdata, bk[i].name) == 0)
+        if (stricmp(searchdata, bk[i].name) == 0)
         {
             printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
             printf("\nEntrer le nom modifié du livre: ");
@@ -92,7 +95,7 @@ void delete_book()
     printf("\n\nID\tNom\t\tAuteur\n");
     for (int i = 1; i < 100; i++)
     {
-        if (strcmp(searchdata, bk[i].name) == 0)
+        if (stricmp(searchdata, bk[i].name) == 0)
         {
             printf("%d\t%s\t\t%s\n", bk[i].id, bk[i].name, bk[i].author);
             bk[i].id = 0;
