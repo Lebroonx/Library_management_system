@@ -12,8 +12,10 @@ void exit_app();
 
 int j;
 
+
 int main()
 {   
+    printf("Bienvenu !\n");
     do
     {
         menu();
@@ -32,18 +34,28 @@ int main()
                 break;
         
             case 3:
-                delete_book();
+                search_author();
+                await_input();
+                break;
+
+            case 4:
+                modify_book();
                 await_input();
                 break;
         
-            case 4:
+            case 5:
+                delete_book();
+                await_input();
+                break;
+
+            case 6:
                 list_book();
                 await_input();
                 break;
 
-            case 5:
+            case 7:
                 exit_app();
-                break;
+                exit(0);
 
             default:
                 printf("Veuillez selectionner une valeur correcte");
@@ -51,7 +63,7 @@ int main()
         
         }
         
-    }while(j!=5);
+    }while(j!=7);
 
     return 0;
 }
