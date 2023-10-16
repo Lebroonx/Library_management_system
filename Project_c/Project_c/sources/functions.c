@@ -11,6 +11,10 @@ struct book {
 bk[100] = { 0 };
 char searchdata[50];
 
+// Create mutlidimensional list for print and scan
+// Create a template function for repetitive code
+
+
 void await_input()
 {
     printf("\nEntrer une touche pour continuer\n");
