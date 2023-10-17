@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <iostream>
 #include "mysql_connection.h"
@@ -9,40 +8,65 @@
 #include <cppconn/statement.h>
 using namespace std;
 
-const string server = "localhost";
-const string username = "root";
-const string password = "";
+struct book
+{
+    int id;
+    string name;
+    string author;
+    string genre;
+}bk[100];
+
+class Connection
+{
+public:
+    sql::Driver* driver;
+    sql::Connection* con;
+    sql::Statement* stmt;
+    sql::PreparedStatement* pstmt;
+    sql::ResultSet* res;
+    void conn()
+    {
+        try
+        {
+            driver = get_driver_instance();
+            con = driver->connect(server, username, password);
+        }
+        catch (sql::SQLException e)
+        {
+            cout << "Could not connect to server" << endl;
+            exit(0);
+        }
+        con->setSchema("testc");
+    }
+
+    void get_data()
+    {
+        pstmt = con->prepareStatement("SELECT * FROM book;");
+        res = pstmt->executeQuery();
+        int i = 0;
+        while (res->next())
+        {
+            bk[i].id = res->getInt("id");
+            bk[i].name = res->getString("name");
+            bk[i].author = res->getString("author");
+            bk[i].genre = res->getString("genre");
+            i++;
+        }
+    }
+
+private:
+    const string server = "localhost";
+    const string username = "root";
+    const string password = "";
+protected:
+};
 
 int main()
 {
-    sql::Driver *driver;
-    sql::Connection *con;
-    sql::Statement *stmt;
-    sql::PreparedStatement *pstmt;
-    sql::ResultSet *res;
-
-    try
-    {
-        driver = get_driver_instance();
-        con = driver->connect(server, username, password);
-    }
-    catch (sql::SQLException e)
-    {
-        cout << "Could not connect to server" << endl;
-        exit(0);
-    }
-
-    con->setSchema("testc");
-
-    pstmt = con->prepareStatement("SELECT * FROM inventory;");
-    res = pstmt->executeQuery();
-    while (res->next())
-    {
-        cout << res->getInt("id") << endl;
-        cout << res->getString("name") << endl;
-        cout << res->getInt("quantity") << endl;
-    }
-
+    Connection myobj;
+    myobj.conn();
+    myobj.get_data();
+    cout << bk[0].name << bk[0].author << bk[0].genre << endl;
 
 
     /*delete pstmt;

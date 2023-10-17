@@ -3,12 +3,13 @@
 #include <stdlib.h>
 
 
-struct book {
+struct book 
+{
     int id;
     char name[50];
     char author[50];
 }
-bk[100] = { 0 };
+bk[100] = { 0 };    
 char searchdata[50];
 
 // Create mutlidimensional list for print and scan
