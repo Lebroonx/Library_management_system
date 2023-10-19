@@ -1,7 +1,10 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
+#include <string>
 #include <iostream>
 #include "mysql_connection.h"
 #include <cppconn/driver.h>
@@ -23,6 +26,11 @@ struct book
 	string author;
 	string genre;
 }bk[100];
+string searchdata;
+string getname;
+string getauthor;
+string getgenre;
+int j;
 
 class Connection
 {
@@ -51,6 +59,22 @@ public:
 	void conn() override;
 private:
 protected:
+};
+
+class BookManagement: ConnectionSQL
+{
+public:
+	void menu();
+	void show_books();
+	void search_book();
+	void search_author();
+	void add_books();
+	void modify_book();
+	void delete_book();
+	void exit_app();
+private:
+protected:
+
 };
 
 #endif // !DATABASE_H
