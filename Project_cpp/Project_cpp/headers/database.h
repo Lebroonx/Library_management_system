@@ -19,6 +19,8 @@ sql::Statement* stmt;
 sql::PreparedStatement* pstmt;
 sql::ResultSet* res;
 
+
+// list of books as a database
 struct book
 {
 	int id;
@@ -32,6 +34,7 @@ string getauthor;
 string getgenre;
 int j;
 
+// template method to check connection to a database
 class Connection
 {
 public:
@@ -40,12 +43,16 @@ private:
 protected:
 };
 
+// Connection to MySQL database
 class ConnectionSQL : public Connection
 {
 public:
+	// check connection to database
 	void conn() override;
+	// fetch the database in the list of books
 	void get_data();
 private:
+	// datas to connect to the database
 	const string server = "localhost";
 	const string username = "root";
 	const string password = "";
@@ -56,6 +63,7 @@ protected:
 class ConnectionDB : public Connection
 {
 public:
+	// check if the list of book is filled
 	void conn() override;
 private:
 protected:
