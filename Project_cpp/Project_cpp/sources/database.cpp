@@ -22,7 +22,7 @@ void ConnectionSQL::get_data()
     int i = 0;
     while (res->next())
     {
-        bk[i].id = res->getInt("id");
+        bk[i].id = res->getRow();
         bk[i].name = res->getString("name");
         bk[i].author = res->getString("author");
         bk[i].genre = res->getString("genre");
@@ -41,12 +41,12 @@ void ConnectionDB::conn()
 void BookManagement::show_books()
 {
     ConnectionSQL::get_data();
-    cout << "\nListe des livres\n\nNom du livre\t\tAuteur\n" << endl;
+    cout << "\nListe des livres\n\nNom du livre\t\tAuteur\t\tGenre\n" << endl;
     for (int i = 0; i < 100; i++)
     {
         if (bk[i].id != 0)
         {
-            cout << bk[i].name << "\t\t" << bk[i].author << "\t" << endl;
+            cout << bk[i].name << "\t\t" << bk[i].author << "\t\t" << bk[i].genre << endl;
         }
     }
     system("pause");
@@ -54,28 +54,33 @@ void BookManagement::show_books()
 
 void BookManagement::search_book()
 {
+    ConnectionSQL::get_data();
     cout << "\nEntrer le nom du livre: ";
+    cin.ignore();
     getline(cin, searchdata);
-    cout << "\n\nNom du livre\t\tAuteur\n" << endl;
+    cout << "\n\nNom du livre\t\tAuteur\t\tGenre\n" << endl;
     for (int i = 0; i < 100; i++)
     {
         if (searchdata == bk[i].name)
         {
-            cout << bk[i].name << "\t\t" << bk[i].author << "\t" << endl;
+            cout << bk[i].name << "\t\t" << bk[i].author << "\t\t" << bk[i].genre << endl;
         }
     }
+    system("pause");
 }
 
 void BookManagement::search_author()
 {
+    ConnectionSQL::get_data();
     cout << "\nEntrer le nom de l'auteur: " << endl;
+    cin.ignore();
     getline(cin, searchdata);
-    cout << "\n\nNom du livre\t\tAuteur\n" << endl;
+    cout << "\n\nNom du livre\t\tAuteur\t\tGenre\n" << endl;
     for (int i = 0; i < 100; i++)
     {
         if (searchdata == bk[i].author)
         {
-            cout << bk[i].name << "\t\t" << bk[i].author << "\t" << endl;
+            cout << bk[i].name << "\t\t" << bk[i].author << "\t\t" << bk[i].genre << endl;
         }
     }
     system("pause");
@@ -84,6 +89,7 @@ void BookManagement::search_author()
 void BookManagement::add_books()
 {
     cout << "\nEntrer le nom du livre: " << endl;
+    cin.ignore();
     getline(cin, getname);
     cout << "\nEntrer le nom de l'auteur: " << endl;
     getline(cin, getauthor);
@@ -100,6 +106,7 @@ void BookManagement::add_books()
 void BookManagement::modify_book()
 {
     cout << "\nEntrer le nom du livre: " << endl;
+    cin.ignore();
     getline(cin, searchdata);
     cout << "\nChanger le nom du livre: " << endl;
     getline(cin, getname);
@@ -119,6 +126,7 @@ void BookManagement::modify_book()
 void BookManagement::delete_book()
 {
     cout << "\nEntrer le nom du livre: " << endl;
+    cin.ignore();
     getline(cin, searchdata);
     pstmt = con->prepareStatement("DELETE FROM book WHERE name = ?");
     pstmt->setString(1, searchdata);
@@ -151,15 +159,15 @@ void BookManagement::menu()
         break;
 
     case 4:
-        modify_book();
+        add_books();
         break;
 
     case 5:
-        delete_book();
+        modify_book();
         break;
 
     case 6:
-        add_books();
+        delete_book();
         break;
 
     case 7:
@@ -177,9 +185,8 @@ int main()
     Myobj.conn();
     Myobj.get_data();
     BookManagement Livre;
-    /*do 
+    do 
     {
         Livre.menu();
-    } while (j != 7);*/
-    Livre.search_book();
+    } while (j != 7);
 }
